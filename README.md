@@ -7,6 +7,11 @@ This is a repository for [Cabbage](https://cabbageaudio.com/) files made by [Tri
 
 ## Content
 
+* TPZ_Beller (id tpbl): a simple instrument to create pseudo bell sounds
 * TPZ_Degrader (id tpdg): bit reduction and foldover effect
-* TPZ_RmSynth (id tprs): a simple Instrument based on Ring modulation 
+* TPZ_MBDistortion (id mdtp): a multiband distortion effect
+* TPZ_Preset_list_MIDI_and_button (id tpp0): an example on how to manage presets with gui and midi PC commands
+* TPZ_RmSynth (id tprs): a simple instrument based on ring modulation 
 * TPZ_Rotative_Dly (id rdtp): a delay with repeats moving around the head of the listener (hrtf method)
+* TPZ_SwedeSaw (id tpss): a poor imitation of the HM2 distortion pedal
+* TPZ_TriggerFilter (id tztf): three indipendent bandpassess that trigger an envelope applied to audio if signal above threshold
