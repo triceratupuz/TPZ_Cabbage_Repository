@@ -73,8 +73,6 @@ gistace init 0
 
 
 instr 1
-aL inch 1
-aR inch 2
 
 ;reset output audio
 gaoL = 0
@@ -210,7 +208,6 @@ od
 
 
 ;Increment current istance value
-gistace_prev = gistace
 gistace = (gistace + 1) % giSimultaneousIstances
 ;Turnon new parameters reader
 event_i "i", $READINSTR + 0.01 + 0.01 * gistace, 0, -1, gistace

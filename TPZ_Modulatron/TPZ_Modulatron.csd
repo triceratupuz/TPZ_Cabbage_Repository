@@ -191,7 +191,7 @@ endin
 
 
 instr 10;pitchshifteddelay
-print p1
+print p4
 Spitch sprintf "pitch%d", p4
 kpitch_ cabbageGetValue Spitch
 kpitch port semitone(kpitch_), giport
@@ -265,8 +265,11 @@ keff_ cabbageGetValue "effect"
 kdir port ampdbfs(kdir_), giport
 keff port ampdbfs(keff_), giport
 
-aL = gaut[0] * kdir + (gaut[2] + gaut[4] + gaut[6] + gaut[8] + gaut[10]) * keff 
-aR = gaut[1] * kdir + (gaut[3] + gaut[5] + gaut[7] + gaut[9] + gaut[11]) * keff
+aeffL AtanLimit (gaut[2] + gaut[4] + gaut[6] + gaut[8] + gaut[10]) * keff 
+aeffR AtanLimit (gaut[3] + gaut[5] + gaut[7] + gaut[9] + gaut[11]) * keff
+
+aL = gaut[0] * kdir + aeffL
+aR = gaut[1] * kdir + aeffR
 
 outs aL, aR
 
