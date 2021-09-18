@@ -14,7 +14,7 @@ label bounds(355, 5, 50, 15), text("data2"), fontColour("black")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4 --midi-velocity-amp=5
+-n -d -+rtmidi=NULL -M0 -Q0 -m0d
 </CsOptions>
 <CsInstruments>
 ; Initialize the global variables. 
