@@ -1,7 +1,7 @@
 ;MidiFilter
 ;developed by Triceratupuz Lab
 ;http://triceratupuz.altervista.org/
-;REV 20210918
+;REV 20210921
 <Cabbage>
 form caption("Midi Filter") size(360, 227), guiMode("queue") pluginId("mftp") colour(190,190,190)
 </Cabbage>
@@ -18,7 +18,6 @@ nchnls = 2
 massign 0, 0
 
 gimidiin ftgen 1, 0, 64, -2, -1
-gimidicodes ftgen 2, 0, 16, -2, -1, -1, -1, -1, -1, 144, 128, 176, 192, 224, 160, 208
 
 instr 1
 iY init 1
@@ -75,7 +74,7 @@ od
 kidx = 0
 remidiin:
 kstatus, kchan, kdata1, kdata2 midiin
-    printk2 kstatus
+    ;printk2 kstatus
     tabw kstatus, kidx, gimidiin
     tabw kchan, kidx + 1, gimidiin
     tabw kdata1, kidx + 2, gimidiin
@@ -131,8 +130,6 @@ kdata2max cabbageGetValue sprintf("data2max%d", p4)
 
 kevent = 0
 ;read storage table
-kevent tab kevent_, gimidicodes
-kevent = round(kevent)
 kidx = 0
 while kidx < tableng(gimidiin) do
     kstatus tab kidx, gimidiin
@@ -155,16 +152,64 @@ while kidx < tableng(gimidiin) do
                     endif
                 endif
             endif
-        else;all other messagess
-            if kstatus == kevent then
-                printk2 kevent
+        elseif  kevent_ == 5 then;notes only
+            if kstatus == 144 then
                 if kchannel >= kchanmin && kchannel <= kchanmax then
                     if kdata1 >= kdata1min && kdata1 <= kdata1max && kdata2 >= kdata2min && kdata2 <= kdata2max then
-                       event "i", 20 + 0.001 * kidx, 0, -1, kstatus, kchannel, kdata1, kdata2 
+                       event "i", 20 + 0.001 * kidx, 0, -1, kstatus, kchannel, kdata1, kdata2  
                     endif
                 endif
             endif
-        endif        
+        elseif  kevent_ == 6 then;notes only
+            if kstatus == 128 then
+                if kchannel >= kchanmin && kchannel <= kchanmax then
+                    if kdata1 >= kdata1min && kdata1 <= kdata1max && kdata2 >= kdata2min && kdata2 <= kdata2max then
+                       event "i", 20 + 0.001 * kidx, 0, -1, kstatus, kchannel, kdata1, kdata2  
+                    endif
+                endif
+            endif
+        elseif  kevent_ == 7 then;cc
+            if kstatus == 176 then
+                if kchannel >= kchanmin && kchannel <= kchanmax then
+                    if kdata1 >= kdata1min && kdata1 <= kdata1max && kdata2 >= kdata2min && kdata2 <= kdata2max then
+                       event "i", 20 + 0.001 * kidx, 0, -1, kstatus, kchannel, kdata1, kdata2  
+                    endif
+                endif
+            endif
+        elseif  kevent_ == 8 then;pc
+            if kstatus == 192 then
+                if kchannel >= kchanmin && kchannel <= kchanmax then
+                    if kdata1 >= kdata1min && kdata1 <= kdata1max then
+                       event "i", 20 + 0.001 * kidx, 0, -1, kstatus, kchannel, kdata1, kdata2  
+                    endif
+                endif
+            endif
+       elseif  kevent_ == 9 then;bend
+            if kstatus == 224 then
+                if kchannel >= kchanmin && kchannel <= kchanmax then
+                    if kdata1 >= kdata1min && kdata1 <= kdata1max && kdata2 >= kdata2min && kdata2 <= kdata2max then
+                       event "i", 20 + 0.001 * kidx, 0, -1, kstatus, kchannel, kdata1, kdata2  
+                    endif
+                endif
+            endif
+       elseif  kevent_ == 10 then;poly aftouch
+            if kstatus == 160 then
+                if kchannel >= kchanmin && kchannel <= kchanmax then
+                    if kdata1 >= kdata1min && kdata1 <= kdata1max && kdata2 >= kdata2min && kdata2 <= kdata2max then
+                       event "i", 20 + 0.001 * kidx, 0, -1, kstatus, kchannel, kdata1, kdata2  
+                    endif
+                endif
+            endif                       
+       elseif  kevent_ == 11 then;ch aftouch
+            if kstatus == 208 then
+                if kchannel >= kchanmin && kchannel <= kchanmax then
+                    if kdata1 >= kdata1min && kdata1 <= kdata1max && kdata2 >= kdata2min && kdata2 <= kdata2max then
+                       event "i", 20 + 0.001 * kidx, 0, -1, kstatus, kchannel, kdata1, kdata2  
+                    endif
+                endif
+            endif          
+        
+        endif
     endif
     kidx += 4
 od

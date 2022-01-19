@@ -166,11 +166,8 @@ while iY < 5 do
 od
 
 
-
-
-
 ;BPM
-kf1 init 60
+;kf1 init 60
 kbpmType cabbageGetValue "BpmType"
 if kbpmType == 1 then;manual
 	kbpm_m cabbageGetValue "Bpm_m"
@@ -180,7 +177,7 @@ if kbpmType == 1 then;manual
 	endif
 
 else ;HOST
-	kbpm_h chnget "HOST_BPM"
+	kbpm_h cabbageGetValue "HOST_BPM"
 	kbpm_m cabbageGetValue "Bpm_m"
 	if kbpm_h != kbpm_m then
 	    cabbageSetValue "Bpm_m", kbpm_h
