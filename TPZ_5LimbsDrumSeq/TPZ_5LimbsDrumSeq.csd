@@ -18,15 +18,15 @@ label bounds(505, 20, 98, 15), text("Error Velocity"), fontColour("black")
 nslider bounds(505, 0, 98, 20), channel("ErrorV"), colour("white"), fontColour("black"), range(0, 1, 0, 1, 0.01)
 
 button bounds(750, 0, 160, 39), channel("StartStop"), text("Play","Stop"), colour:0("black"), colour:1("red"), value(0) 
-;combobox bounds(750, 20, 160, 19), channel("StartStopType"), value(2), items("Manual", "HOST")
+combobox bounds(750, 40, 160, 19), channel("StartStopType"), value(2), items("Manual", "HOST")
 
 
-image bounds(750, 40, 160, 400), channel("disp"), colour(0,0,0)
+image bounds(750, 60, 160, 380), channel("disp"), colour(0,0,0)
 {
 label bounds(0, 0, 160, 16) text("<No Preset>") channel("presetName") colour(50, 50, 50)  fontColour("red")
 listbox bounds(0, 20, 160, 340) populate("*.pres","TPZ_5LimbsDrumSeq_pres") channel("recallCombo") channelType("string") colour("grey")
-combobox bounds(0, 360, 160, 20), channel("changePresetMode"), value(2), items("Free change", "Change at Beat Pattern1", "Change at End Pattern1")
-filebutton bounds(0, 380, 160, 20) channel("saveFile") text("Save") populate("*.pres","TPZ_5LimbsDrumSeq_pres") mode("save") colour:0(50, 50, 50) colour:1(50, 50, 50) 
+combobox bounds(0, 340, 160, 20), channel("changePresetMode"), value(2), items("Free change", "Change at Beat Pattern1", "Change at End Pattern1")
+filebutton bounds(0, 360, 160, 20) channel("saveFile") text("Save") populate("*.pres","TPZ_5LimbsDrumSeq_pres") mode("save") colour:0(50, 50, 50) colour:1(50, 50, 50) 
 }
 
 
@@ -191,25 +191,16 @@ kStaStoT cabbageGetValue "StartStopType"
 kStaStoPH chnget "IS_PLAYING"
 kStaStoRH chnget "IS_RECORDING"
 
-/*
+
 if kStaStoT == 2 then
     if ((changed(kStaStoPH) == 1) && (kStaStoPH == 1)) || ((changed(kStaStoRH) == 1) && (kStaStoRH == 1)) then
-        cabbageSet 1, "StartStop", "value(1)"
-        event "i", 1120.01, 0, -1, 1
-        event "i", 1120.02, 0, -1, 2
-        event "i", 1120.03, 0, -1, 3
-        event "i", 1120.04, 0, -1, 4
-        event "i", 1120.05, 0, -1, 5        
+        cabbageSetValue "StartStop", k(1)
     elseif ((changed(kStaStoPH) == 1) && (kStaStoPH == 0)) || ((changed(kStaStoRH) == 1) && (kStaStoRH == 0)) then
-        cabbageSet 1, "StartStop", "value(0)"
-        event "i", -1120.01, 0, -1, 1
-        event "i", -1120.02, 0, -1, 2
-        event "i", -1120.03, 0, -1, 3
-        event "i", -1120.04, 0, -1, 4
-        event "i", -1120.05, 0, -1, 5
+        cabbageSetValue "StartStop", k(0)
     endif
 endif
-*/
+
+
 
 kStaSto cabbageGetValue "StartStop"
 if changed(kStaSto) == 1 && kStaSto == 1 then

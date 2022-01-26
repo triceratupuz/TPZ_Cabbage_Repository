@@ -213,14 +213,14 @@ filebutton bounds(260, 620, 60, 20), text("Save"), mode("preset"), populate("*.s
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M0 -Q0 -m0d
+-n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4 --midi-velocity-amp=5
 </CsOptions>
 <CsInstruments>
 ; Initialize the global variables. 
 ksmps = 32
 nchnls = 2
 0dbfs = 1
-massign 0,0
+;massign 0,0
 
 
 gaoscilstore[] init 6
@@ -241,7 +241,7 @@ event_i "i", 10.03, 0.1, -1, 3
 event_i "i", 10.04, 0.1, -1, 4
 event_i "i", 10.05, 0.1, -1, 5
 event_i "i", 10.06, 0.1, -1, 6
-event_i "i", 50, 0, -1, 2
+;event_i "i", 50, 0, -1
 
 
 
@@ -251,7 +251,7 @@ kneutuning cabbageGetValue "tuningneu"
 kmaxtuning cabbageGetValue "tuningmax"
 
 
-
+/*
 ;MIDI
 kstatus, kchan, kdata1, kdata2 midiin
 ;printk2 kdata1
@@ -268,7 +268,7 @@ if kstatus == 144 then
     cabbageSetValue "tuning", kmastertu
 endif
 
-
+*/
 
 ;gui
 kmastertuning_ cabbageGetValue "tuning"
@@ -423,5 +423,6 @@ endin
 ;causes Csound to run for about 7000 years...
 f0 z
 i 1 0 -1
+i 50 0 -1
 </CsScore>
 </CsoundSynthesizer>
